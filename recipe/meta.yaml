@@ -37,7 +37,6 @@ test:
     - test -f "${PREFIX}/lib/{{ each_lib }}.a"
     - test -f "${PREFIX}/lib/{{ each_lib }}.dylib"         # [osx]
     - test -f "${PREFIX}/lib/{{ each_lib }}.so"            # [linux]
-    - test -f "${PREFIX}/lib/{{ each_lib }}.la"
     {% endfor %}
 
 
@@ -51,3 +50,4 @@ about:
 extra:
   recipe-maintainers:
     - petercable
+    - carlodri
