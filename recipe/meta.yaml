@@ -8,7 +8,7 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://sources.voidlinux.org/libev-{{ version }}/libev-{{ version }}.tar.gz
+  url: http://dist.schmorp.de/libev/Attic/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
