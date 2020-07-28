@@ -1,6 +1,6 @@
 {% set name = "libev" %}
-{% set version = "4.25" %}
-{% set sha256 = "78757e1c27778d2f3795251d9fe09715d51ce0422416da4abb34af3929c02589" %}
+{% set version = "4.33" %}
+{% set sha256 = "507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://dist.schmorp.de/libev/Attic/{{ name }}-{{ version }}.tar.gz
+  url: https://sources.voidlinux.org/libev-{{ version }}/libev-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
