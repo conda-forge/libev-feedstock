@@ -43,10 +43,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=532&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=master&jobName=linux&configuration=linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -64,22 +64,23 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx</td>
+              <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=532&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=532&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr>
           </tbody>
         </table>
       </details>
-    </td>
-  </tr>
-  <tr>
-    <td>Windows</td>
-    <td>
-      <img src="https://img.shields.io/badge/Windows-disabled-lightgrey.svg" alt="Windows disabled">
     </td>
   </tr>
 </table>
@@ -90,6 +91,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libev-green.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libev--static-green.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) |
 
 Installing libev
 ================
@@ -100,10 +102,10 @@ Installing `libev` from the `conda-forge` channel can be achieved by adding `con
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `libev` can be installed with:
+Once the `conda-forge` channel has been enabled, `libev, libev-static` can be installed with:
 
 ```
-conda install libev
+conda install libev libev-static
 ```
 
 It is possible to list all of the versions of `libev` available on your platform with:
@@ -178,4 +180,5 @@ Feedstock Maintainers
 
 * [@carlodri](https://github.com/carlodri/)
 * [@petercable](https://github.com/petercable/)
+* [@wolfv](https://github.com/wolfv/)
 
