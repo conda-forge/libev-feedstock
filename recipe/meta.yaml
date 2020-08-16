@@ -21,6 +21,7 @@ requirements:
   build:
     - libtool
     - make  # [unix]
+    - libtool  # [unix]
     - {{ compiler('c') }}
   host:
 
