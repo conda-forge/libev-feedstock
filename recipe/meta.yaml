@@ -62,6 +62,12 @@ outputs:
   - name: libev-libevent
     script: install.sh  # [unix]
     requirements:
+      build:
+        - libtool
+        - make  # [unix]
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage('libev', exact=True) }}
       run:
         - {{ pin_subpackage('libev', exact=True) }}
       run_constrained:
