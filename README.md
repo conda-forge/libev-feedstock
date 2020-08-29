@@ -91,6 +91,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libev-green.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libev.svg)](https://anaconda.org/conda-forge/libev) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libev--libevent-green.svg)](https://anaconda.org/conda-forge/libev-libevent) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libev-libevent.svg)](https://anaconda.org/conda-forge/libev-libevent) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libev-libevent.svg)](https://anaconda.org/conda-forge/libev-libevent) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libev-libevent.svg)](https://anaconda.org/conda-forge/libev-libevent) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libev--static-green.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libev-static.svg)](https://anaconda.org/conda-forge/libev-static) |
 
 Installing libev
@@ -102,10 +103,10 @@ Installing `libev` from the `conda-forge` channel can be achieved by adding `con
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `libev, libev-static` can be installed with:
+Once the `conda-forge` channel has been enabled, `libev, libev-libevent, libev-static` can be installed with:
 
 ```
-conda install libev libev-static
+conda install libev libev-libevent libev-static
 ```
 
 It is possible to list all of the versions of `libev` available on your platform with:
