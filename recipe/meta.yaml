@@ -57,11 +57,15 @@ outputs:
       run:
         - {{ pin_subpackage('libev', exact=True) }}
 
+  # Compatibility wrapper to enable programs which use the libevent event loop to link against libev
+  # Split into a separate package to prevent clobbering libevent
   - name: libev-libevent
     script: install.sh  # [unix]
     requirements:
       run:
         - {{ pin_subpackage('libev', exact=True) }}
+      run_constrained:
+        - libevent ==9999999999
     test:
       commands:
         - test -f "${PREFIX}/include/event.h"
