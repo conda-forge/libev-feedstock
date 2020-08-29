@@ -33,7 +33,7 @@ outputs:
         # Check for headers.
         - test -f "${PREFIX}/include/ev.h"
         - test -f "${PREFIX}/include/ev++.h"
-        - test -f "${PREFIX}/include/event.h"
+        - test ! -f "${PREFIX}/include/event.h"
         - test ! -f "${PREFIX}/lib/libev.a"
         - test -f "${PREFIX}/lib/libev${SHLIBEXT}"  # [unix]
 
@@ -50,7 +50,22 @@ outputs:
         - {{ pin_subpackage('libev', exact=True) }}
     test:
       commands:
+        - test ! -f "${PREFIX}/include/event.h"
         - test -f "${PREFIX}/lib/libev.a"
+      host:
+        - {{ pin_subpackage('libev', exact=True) }}
+      run:
+        - {{ pin_subpackage('libev', exact=True) }}
+
+  - name: libev-libevent
+    script: install.sh  # [unix]
+    requirements:
+      run:
+        - {{ pin_subpackage('libev', exact=True) }}
+    test:
+      commands:
+        - test -f "${PREFIX}/include/event.h"
+
 
 about:
   home: http://software.schmorp.de/pkg/libev.html
