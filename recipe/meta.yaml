@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
@@ -33,7 +33,7 @@ outputs:
         # Check for headers.
         - test -f "${PREFIX}/include/ev.h"
         - test -f "${PREFIX}/include/ev++.h"
-        - test -f "${PREFIX}/include/event.h"
+        - test ! -f "${PREFIX}/include/event.h"
         - test ! -f "${PREFIX}/lib/libev.a"
         - test -f "${PREFIX}/lib/libev${SHLIBEXT}"  # [unix]
 
@@ -50,7 +50,32 @@ outputs:
         - {{ pin_subpackage('libev', exact=True) }}
     test:
       commands:
+        - test ! -f "${PREFIX}/include/event.h"
         - test -f "${PREFIX}/lib/libev.a"
+      host:
+        - {{ pin_subpackage('libev', exact=True) }}
+      run:
+        - {{ pin_subpackage('libev', exact=True) }}
+
+  # Compatibility wrapper to enable programs which use the libevent event loop to link against libev
+  # Split into a separate package to prevent clobbering libevent
+  - name: libev-libevent
+    script: install.sh  # [unix]
+    requirements:
+      build:
+        - libtool
+        - make  # [unix]
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage('libev', exact=True) }}
+      run:
+        - {{ pin_subpackage('libev', exact=True) }}
+      run_constrained:
+        - libevent ==9999999999
+    test:
+      commands:
+        - test -f "${PREFIX}/include/event.h"
+
 
 about:
   home: http://software.schmorp.de/pkg/libev.html
