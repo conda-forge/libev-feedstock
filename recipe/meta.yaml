@@ -1,44 +1,43 @@
-{% set name = "libev" %}
 {% set version = "4.33" %}
-{% set sha256 = "507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea" %}
 
 package:
-  name: {{ name|lower }}
+  name: libev
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: http://dist.schmorp.de/libev/Attic/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: http://dist.schmorp.de/libev/Attic/libev-{{ version }}.tar.gz
+  sha256: 507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
 
 build:
   number: 1
-  skip: true  # [win]
   run_exports:
-    - {{ pin_subpackage(name, max_pin='x.x') }}
+    - {{ pin_subpackage('libev', max_pin='x.x') }}
 
 requirements:
   build:
-    - libtool
-    - make  # [unix]
-    - libtool  # [unix]
+    - make                   # [unix]
+    - libtool                # [unix]
+    - autotools_clang_conda  # [win]
     - {{ compiler('c') }}
   host:
 
 outputs:
   - name: libev
-    script: install.sh  # [unix]
+    script: install.sh   # [unix]
     test:
       commands:
         # Check for headers.
-        - test -f "${PREFIX}/include/ev.h"
-        - test -f "${PREFIX}/include/ev++.h"
-        - test ! -f "${PREFIX}/include/event.h"
-        - test ! -f "${PREFIX}/lib/libev.a"
-        - test -f "${PREFIX}/lib/libev${SHLIBEXT}"  # [unix]
+        - test -f "${PREFIX}/include/ev.h"                 # [unix]
+        - test -f "${PREFIX}/include/ev++.h"               # [unix]
+        - test ! -f "${PREFIX}/include/event.h"            # [unix]
+        - test ! -f "${PREFIX}/lib/libev.a"                # [unix]
+        - test -f "${PREFIX}/lib/libev${SHLIBEXT}"         # [unix]
+        - if not exist %PREFIX%/Library/lib/ev.lib exit 1  # [win]
 
   - name: libev-static
     script: install.sh  # [unix]
+    build:
+      skip: true  # [win]
     requirements:
       build:
         - libtool
@@ -61,6 +60,8 @@ outputs:
   # Split into a separate package to prevent clobbering libevent
   - name: libev-libevent
     script: install.sh  # [unix]
+    build:
+      skip: true  # [win]
     requirements:
       build:
         - libtool
