@@ -14,10 +14,11 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
+    - {{ compiler('c') }}
     - libtool
     - make  # [unix]
     - libtool  # [unix]
-    - {{ compiler('c') }}
   host:
 
 outputs:
@@ -39,9 +40,10 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
         - libtool
         - make  # [unix]
-        - {{ compiler('c') }}
       host:
         - {{ pin_subpackage('libev', exact=True) }}
       run:
@@ -61,9 +63,10 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
         - libtool
         - make  # [unix]
-        - {{ compiler('c') }}
       host:
         - {{ pin_subpackage('libev', exact=True) }}
       run:
