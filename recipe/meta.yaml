@@ -9,15 +9,16 @@ source:
   sha256: 507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
   build:
+    - {{ stdlib('c') }}
+    - {{ compiler('c') }}
     - libtool
     - make  # [unix]
     - libtool  # [unix]
-    - {{ compiler('c') }}
   host:
 
 outputs:
@@ -39,9 +40,10 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
         - libtool
         - make  # [unix]
-        - {{ compiler('c') }}
       host:
         - {{ pin_subpackage('libev', exact=True) }}
       run:
@@ -61,9 +63,10 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
         - libtool
         - make  # [unix]
-        - {{ compiler('c') }}
       host:
         - {{ pin_subpackage('libev', exact=True) }}
       run:
