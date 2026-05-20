@@ -11,7 +11,7 @@ source:
     - 0001-event.h-use-winsock2-timeval-on-win32.patch  # [win]
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
