@@ -7,6 +7,8 @@ package:
 source:
   url: http://dist.schmorp.de/libev/Attic/libev-{{ version }}.tar.gz
   sha256: 507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
+  patches:
+    - 0001-event.h-use-winsock2-timeval-on-win32.patch  # [win]
 
 build:
   number: 2
