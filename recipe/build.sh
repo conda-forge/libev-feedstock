@@ -2,8 +2,6 @@
 set -ex
 extra_args=""
 if [[ "${target_platform}" == "win-64" ]]; then
-  extra_args="${extra_args} --ld=${LD}"
-
   extra_args="${extra_args} --target-os=win64"
   extra_args="${extra_args} --enable-cross-compile"
   extra_args="${extra_args} --toolchain=msvc"
