@@ -41,8 +41,7 @@ outputs:
       files:
         - if: win
           then:
-            - Library/bin/*ev*.dll
-            - Library/lib/*ev*.lib
+            - Library/lib/ev.lib
             - Library/include/ev.h
             - Library/include/ev++.h
           else:
@@ -55,12 +54,20 @@ outputs:
       run_exports:
         - ${{ pin_subpackage('libev', upper_bound='x.x') }}
     tests:
-      - package_contents:
-          include:
-            - ev.h
-            - ev++.h
-          lib:
-            - ev
+      - if: win
+        then:
+          package_contents:
+            files:
+              - Library/include/ev.h
+              - Library/include/ev++.h
+              - Library/lib/ev.lib
+        else:
+          package_contents:
+            include:
+              - ev.h
+              - ev++.h
+            lib:
+              - ev
 
   - package:
       name: libev-static
