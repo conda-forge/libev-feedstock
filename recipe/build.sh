@@ -4,11 +4,6 @@ set -euxo pipefail
 cp "$BUILD_PREFIX/share/gnuconfig/config."* .
 
 configure_args=(--prefix="$PREFIX")
-if [[ "$target_platform" == win-* ]]; then
-  CFLAGS="$CFLAGS -DWIN32"
-  CXXFLAGS="$CXXFLAGS -DWIN32"
-  CPPFLAGS="$CPPFLAGS -DWIN32"
-fi
 if [[ "$target_platform" == win-arm64 ]]; then
   target="--target=aarch64-pc-windows-msvc"
   CFLAGS="$CFLAGS $target"
