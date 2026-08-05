@@ -3,11 +3,11 @@ About libev-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libev-feedstock/blob/main/LICENSE.txt)
 
-Home: http://software.schmorp.de/pkg/libev.html
+Home: https://software.schmorp.de/pkg/libev.html
 
-Package license: BSD-2-Clause
+Package license: BSD-2-Clause OR GPL-2.0-or-later
 
-Summary: A full-featured and high-performance event loop that is loosely modeled after libevent, but without its limitations and bugs.
+Summary: A full-featured and high-performance event loop loosely modeled after libevent
 
 Current build status
 ====================
@@ -38,6 +38,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=532&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=532&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libev-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>
