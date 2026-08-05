@@ -21,11 +21,10 @@ outputs:
       build:
         - ${{ compiler('c') }}
         - ${{ stdlib('c') }}
+        - gnuconfig
         - if: win
           then: autotools_clang_conda
-          else:
-            - gnuconfig
-            - make
+          else: make
     build:
       script:
         - if: win

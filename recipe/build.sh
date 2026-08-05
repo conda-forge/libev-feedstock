@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-if [[ "$target_platform" != win-* ]]; then
-  cp "$BUILD_PREFIX/share/gnuconfig/config."* .
-fi
+cp "$BUILD_PREFIX/share/gnuconfig/config."* .
 
-./configure --prefix="$PREFIX"
+configure_args=(--prefix="$PREFIX")
+if [[ "$target_platform" == win-* ]]; then
+  CFLAGS="$CFLAGS -DWIN32"
+  CXXFLAGS="$CXXFLAGS -DWIN32"
+  CPPFLAGS="$CPPFLAGS -DWIN32"
+fi
+if [[ "$target_platform" == win-arm64 ]]; then
+  target="--target=aarch64-pc-windows-msvc"
+  CFLAGS="$CFLAGS $target"
+  CXXFLAGS="$CXXFLAGS $target"
+  CPPFLAGS="$CPPFLAGS $target"
+  LDFLAGS="$LDFLAGS $target"
+  configure_args+=(--build=x86_64-w64-mingw32 --host=aarch64-w64-mingw32)
+fi
+export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
+
+./configure "${configure_args[@]}"
 [[ "$target_platform" == win-* ]] && patch_libtool
 make -j"${CPU_COUNT}"
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
