@@ -12,7 +12,9 @@ source:
   sha256: 507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
   patches:
     - if: win
-      then: event-timeval-win.patch
+      then:
+        - event-timeval-win.patch
+        - windows-shared.patch
 
 build:
   number: 3
@@ -41,7 +43,8 @@ outputs:
       files:
         - if: win
           then:
-            - Library/lib/ev.lib
+            - Library/bin/*ev*.dll
+            - Library/lib/*.lib
             - Library/include/ev.h
             - Library/include/ev++.h
           else:
@@ -60,7 +63,8 @@ outputs:
             files:
               - Library/include/ev.h
               - Library/include/ev++.h
-              - Library/lib/ev.lib
+              - Library/bin/*ev*.dll
+              - Library/lib/*.lib
         else:
           package_contents:
             include:
