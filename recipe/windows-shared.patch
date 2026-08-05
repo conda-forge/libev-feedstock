@@ -1,0 +1,32 @@
+--- a/ev.c
++++ b/ev.c
+@@ -239,6 +239,8 @@
+ # include <unistd.h>
+ #else
+ # include <io.h>
++# define close _close
++# define dup2 _dup2
+ # define WIN32_LEAN_AND_MEAN
+ # include <winsock2.h>
+ # include <windows.h>
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -15,7 +15,7 @@
+ 
+ lib_LTLIBRARIES = libev.la
+ libev_la_SOURCES = ev.c event.c
+-libev_la_LDFLAGS = -version-info $(VERSION_INFO)
++libev_la_LDFLAGS = -version-info $(VERSION_INFO) -no-undefined
+ 
+ include_HEADERS = ev.h ev++.h event.h
+ 
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -360,7 +360,7 @@
+ include_HEADERS = ev.h ev++.h event.h
+ lib_LTLIBRARIES = libev.la
+ libev_la_SOURCES = ev.c event.c
+-libev_la_LDFLAGS = -version-info $(VERSION_INFO)
++libev_la_LDFLAGS = -version-info $(VERSION_INFO) -no-undefined
+ all: config.h
+ 	$(MAKE) $(AM_MAKEFLAGS) all-am

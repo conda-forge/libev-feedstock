@@ -1,0 +1,123 @@
+schema_version: 1
+
+context:
+  version: "4.33"
+
+recipe:
+  name: libev-split
+  version: ${{ version }}
+
+source:
+  url: https://dist.schmorp.de/libev/Attic/libev-${{ version }}.tar.gz
+  sha256: 507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
+  patches:
+    - if: win
+      then:
+        - event-timeval-win.patch
+        - windows-shared.patch
+
+build:
+  number: 3
+
+outputs:
+  - staging:
+      name: libev-build
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - gnuconfig
+        - if: win
+          then: autotools_clang_conda
+          else: make
+    build:
+      script:
+        - if: win
+          then: build.bat
+          else: build.sh
+
+  - package:
+      name: libev
+    inherit: libev-build
+    build:
+      files:
+        - if: win
+          then:
+            - Library/bin/ev-*.dll
+            - Library/lib/ev.lib
+            - Library/include/ev.h
+            - Library/include/ev++.h
+          else:
+            - include/ev.h
+            - include/ev++.h
+            - if: linux
+              then: lib/libev.so*
+              else: lib/libev*.dylib
+    requirements:
+      run_exports:
+        - ${{ pin_subpackage('libev', upper_bound='x.x') }}
+    tests:
+      - if: win
+        then:
+          package_contents:
+            files:
+              - Library/include/ev.h
+              - Library/include/ev++.h
+              - Library/bin/ev-*.dll
+              - Library/lib/ev.lib
+        else:
+          package_contents:
+            include:
+              - ev.h
+              - ev++.h
+            lib:
+              - ev
+
+  - package:
+      name: libev-static
+    inherit: libev-build
+    build:
+      files:
+        - if: win
+          then: Library/lib/ev_static.lib
+          else: lib/libev.a
+    requirements:
+      run:
+        - ${{ pin_subpackage('libev', exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            - if: win
+              then: Library/lib/ev_static.lib
+              else: lib/libev.a
+
+  # Compatibility wrapper for programs using the libevent event loop.
+  # Keep it separate to avoid clobbering libevent.
+  - package:
+      name: libev-libevent
+    inherit: libev-build
+    build:
+      skip: win
+      files:
+        - include/event.h
+    requirements:
+      run:
+        - ${{ pin_subpackage('libev', exact=True) }}
+      run_constraints:
+        - libevent ==9999999999
+    tests:
+      - package_contents:
+          include:
+            - event.h
+
+about:
+  homepage: https://software.schmorp.de/pkg/libev.html
+  license: BSD-2-Clause OR GPL-2.0-or-later
+  license_file: LICENSE
+  summary: A full-featured and high-performance event loop loosely modeled after libevent
+
+extra:
+  recipe-maintainers:
+    - petercable
+    - carlodri
+    - wolfv

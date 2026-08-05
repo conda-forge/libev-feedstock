@@ -1,0 +1,12 @@
+--- a/event.h
++++ b/event.h
+@@ -63,7 +63,9 @@ extern "C" {
+ 
+ /* we need sys/time.h for struct timeval only */
+-#if !defined (WIN32) || defined (__MINGW32__)
++#if defined (_WIN32) && !defined (__MINGW32__)
++# include <winsock2.h>
++#else
+ # include <time.h> /* mingw seems to need this, for whatever reason */
+ # include <sys/time.h>
+ #endif
