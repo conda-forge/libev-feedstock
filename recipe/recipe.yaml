@@ -43,8 +43,8 @@ outputs:
       files:
         - if: win
           then:
-            - Library/bin/*ev*.dll
-            - Library/lib/*.lib
+            - Library/bin/ev-*.dll
+            - Library/lib/ev.lib
             - Library/include/ev.h
             - Library/include/ev++.h
           else:
@@ -63,8 +63,8 @@ outputs:
             files:
               - Library/include/ev.h
               - Library/include/ev++.h
-              - Library/bin/*ev*.dll
-              - Library/lib/*.lib
+              - Library/bin/ev-*.dll
+              - Library/lib/ev.lib
         else:
           package_contents:
             include:
@@ -77,16 +77,19 @@ outputs:
       name: libev-static
     inherit: libev-build
     build:
-      skip: win
       files:
-        - lib/libev.a
+        - if: win
+          then: Library/lib/ev_static.lib
+          else: lib/libev.a
     requirements:
       run:
         - ${{ pin_subpackage('libev', exact=True) }}
     tests:
       - package_contents:
           files:
-            - lib/libev.a
+            - if: win
+              then: Library/lib/ev_static.lib
+              else: lib/libev.a
 
   # Compatibility wrapper for programs using the libevent event loop.
   # Keep it separate to avoid clobbering libevent.
